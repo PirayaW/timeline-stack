@@ -1,0 +1,30 @@
+svg {
+	font: 11px sans-serif;
+}
+
+.axis {
+	shape-rendering: crispEdges;
+}
+
+.axis path {
+	fill: none;
+}
+
+.x.axis line {
+	stroke: #d3d3d3;
+	stroke-opacity: .8;
+}
+
+.y.axis path {
+	stroke: black;
+}
+
+.d3-tip {
+	line-height: 1;
+	font-weight: bold;
+	padding: 12px;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	border-radius: 2px;
+	max-width: 250px;
+}

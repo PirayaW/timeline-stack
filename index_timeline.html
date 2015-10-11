@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Man-hour Utilization</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+	<script type="text/javascript" src="script/timelineChart.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/timeline_style.css">
+
+	<script type="text/javascript">
+		var all_data = [
+				['No. 1', 'SEND REQUEST', new Date(2015, 2, 2, 12, 12, 0), new Date(2015, 3, 1, 10, 10, 0), 'http://www.google.com', 'A description of project number one, SEND REQUEST phase'],
+				['No. 1', 'GET MORE INFO', new Date(2015, 3, 1, 10, 10, 0), new Date(2015, 3, 12, 10, 10, 0), 'http://www.google.com', 'A description of project number one, GET MORE INFO phase'],
+				['No. 1', 'CLOSE AWAITING', new Date(2015, 3, 12, 10, 10, 0), new Date(2015, 4, 1, 10, 10, 0), 'http://www.google.com', 'A description of project number one, CLOSE AWAITING phase'],
+				['No. 1', 'IN PROGRESS', new Date(2015, 4, 1, 10, 10, 0), new Date(2015, 4, 1, 12, 10, 0), 'http://www.google.com', 'A description of project number one, IN PROGRESS phase'],
+				['No. 2', 'SEND REQUEST', new Date(2015, 2, 1, 12, 12, 0), new Date(2015, 2, 10, 10, 10, 0), 'http://www.facebook.com', 'A description of project number two, SEND REQUEST phase'],
+				['No. 2', 'GET MORE INFO', new Date(2015, 2, 10, 10, 10, 0), new Date(2015, 2, 10, 12, 10, 0), 'http://www.facebook.com', 'A description of project number two, GET MORE INFO phase'],
+				['No. 2', 'IN PROGRESS', new Date(2015, 2, 10, 12, 10, 0), new Date(2015, 3, 1, 12, 10, 0), 'http://www.facebook.com', 'A description of project number two, IN PROGRESS phase'],
+				['No. 3', 'GET MORE INFO', new Date(2015, 2, 1, 12, 12, 0), new Date(2015, 2, 1, 14, 12, 0), 'http://www.gmail.com', 'A description of project number three, GET MORE INFO phase'],
+				['No. 3', 'UAT', new Date(2015, 2, 1, 14, 12, 0), new Date(2015, 3, 1, 10, 10, 0), 'http://www.gmail.com', 'A description of project number three, UAT phase'],
+				['No. 3', 'CLOSE AWAITING', new Date(2015, 3, 1, 10, 10, 0), new Date(2015, 3, 10, 12, 10, 0), 'http://www.gmail.com', 'A description of project number three, CLOSE AWAITING phase']
+			];
+
+		$(document).ready(function() {
+			run_timeline(all_data, ".chart");
+		});
+
+		toggle = 0;
+		change = function() {
+			arr = [];
+			if(toggle == 3) {
+				arr.push('No. 1');
+				arr.push('No. 2');
+				arr.push('No. 3');
+			} else if(toggle == 2) {
+				arr.push('No. 1');
+				arr.push('No. 2');
+			} else {
+				arr.push('No. ' + (toggle + 1));
+			}
+			redraw(selectData(arr));
+			toggle = (toggle+1)%4;
+		}
+
+		function selectData(condt) {
+			var data = [];
+			for (var i=0, n=all_data.length; i<n; i++) {
+				for (var j=0, m=condt.length; j<m; j++) {
+					if(all_data[i][0] == condt[j]) {
+						data.push(all_data[i]);
+						break;
+					}
+				}
+			} 
+			return data;
+		}
+
+	</script>
+</head>
+
+<body>
+	<div id="header_title">
+		<h1 id="title_content">Timeline chart</h1>
+	</div>
+	<div id="info" style="overflow:auto;">
+		<table style="float:left;">
+			<tr>
+				<td>From: </td>
+				<td id="from"><b>February 2015</b></td>
+			</tr>
+			<tr>
+				<td>To: </td>
+				<td id="to"><b>March 2015</b></td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		<button onclick="change()">Click Me!</button> 
+	</div>
+	<div class="chart"></div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Man-hour Utilization</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+	<script type="text/javascript" src="script/stackedChart.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/chartstyle.css">
+
+	<script type="text/javascript">
+		
+		function setInfo() {
+			var title = "Man-hour Utilization";
+			var from = "1 September 2015";
+			var to = "30 September 2015";
+			document.getElementById("title_content").innerHTML = title;
+			document.getElementById("from").innerHTML = '<b style="padding-left:5px;">' + from + '</b>';
+			document.getElementById("to").innerHTML = '<b style="padding-left:5px;">' + to + '</b>';
+		}
+
+		var data = [['Team A', 1610.5, 520.0, 157.5],
+					['Team B', 979.5, 293.96, 134.54],
+					['Team C', 860.95, 729.2, 345.85],
+					['Team D', 1237.5, 593, 105.5]];
+			
+		$(document).ready(function() {
+			setInfo();
+			run_stacked(data, ".chart");
+		});
+
+	</script>
+</head>
+
+<body>
+
+	<div id="header_title">
+		<h1 id="title_content"></h1>
+	</div>
+
+	<div id="info" style="overflow:auto;">
+		<table style="float:left;">
+			<tr>
+				<td>From: </td>
+				<td id="from"></td>
+				<td style="padding-left:50px;">To: </td>
+				<td id="to"></td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="chart" style="margin:0 auto;"></div>
+
+</body>
+</html>
